@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <form action="/submit" method="POST">
+      <label for="email">E-mail</label>
+      <input type="text" id="email" placeholder="email" name="email">
+      <p>Czy wyrażasz zgodę na przesłanie oferty marketingowej?</p>
+      <label for="credit-yes">Tak</label>
+      <input type="radio" id="credit-yes" value="yes" name="credit">
+      <label for="credit-no">Nie</label>
+      <input type="radio" id="credit-no" value="no" name="credit">
+      <button type="submit" style="display: block">Wyślij</button>
+    </form>
+  </div>
+</body>
+</html>
