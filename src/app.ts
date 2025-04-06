@@ -14,7 +14,7 @@ app.use(cors())
 connectDB();
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.send('Welcome page');
 });
 
 app.post('/submit', (req, res) => {
