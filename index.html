@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zgoda marketingowa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      text-align: center;
+    }
+    form {
+      display: inline-block;
+      text-align: left;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      margin-bottom: 10px;
+      padding: 10px;
+      width: 100%;
+      font-size: 1rem;
+    }
+    label {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Czy wyrażasz zgodę na przesłanie oferty marketingowej?</h2>
+  <p>Oferta dotyczy dodatkowych środków na rozwój przedsiębiorstwa.</p>
+
+  <form id="consentForm">
+    <label for="email">Twój adres e-mail:</label>
+    <input type="email" id="email" name="email" required placeholder="Wprowadź adres e-mail">
+
+    <label for="consent">Czy wyrażasz zgodę?</label>
+    <select id="consent" name="consent" required>
+      <option value="">Wybierz opcję</option>
+      <option value="Tak">Tak</option>
+      <option value="Nie">Nie</option>
+    </select>
+
+    <button type="submit">Wyślij</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    document.getElementById('consentForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const consent = document.getElementById('consent').value;
+
+      // Wysyłanie danych do Google Sheets (Google Apps Script)
+      const response = await fetch('https://script.google.com/macros/s/AKfycbwVWhvfdz0eL89r-qD1QgRsctXHUWV1oUqi-fxC2szS9GV1xvDKy29_C6rrzPBN2xiU7A/exec', {
+        redirect: "follow",
+        method: 'POST',
+        body: JSON.stringify({ email, consent }),
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        }
+      });
+
+      const result = await response.json();
+
+      // Wyświetl status
+      document.getElementById('status').innerText = result.message;
+      document.getElementById('consentForm').reset();
+    });
+  </script>
+
+</body>
+</html>
